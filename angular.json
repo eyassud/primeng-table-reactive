@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "primeng-table-reactive"
+    }
+  },
+  "defaultProject": "primeng-table-reactive",
+  "cli": {
+    "analytics": "257fe917-5875-44cd-a39e-871364dfae33"
+  }
 }
