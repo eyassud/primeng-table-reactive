@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { ProductService } from './productservice';
+import { EmailService } from './emailservice';
 
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
@@ -40,7 +40,7 @@ import { InputTextModule } from 'primeng/inputtext';
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
-  providers: [ProductService]
+  providers: [EmailService]
 })
 
 export class AppModule { }
