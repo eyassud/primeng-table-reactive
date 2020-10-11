@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -17,12 +17,15 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { ProgressBarModule } from 'primeng/progressbar';
-import { InputTextModule } from 'primeng/inputtext';  
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     TableModule,
     CalendarModule,
     SliderModule,
@@ -33,9 +36,7 @@ import { InputTextModule } from 'primeng/inputtext';
     ButtonModule,
     ToastModule,
     InputTextModule,
-    ProgressBarModule,
-    HttpClientModule,
-    FormsModule
+    ProgressBarModule
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
