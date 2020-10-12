@@ -1,62 +1,73 @@
 <p-toast></p-toast>
 
-
 <div class="card">
+  <form [formGroup]="emailForm" *ngIf="emailForm">
 
-  <p-table [value]="emails" dataKey="id" editMode="row">
-    <ng-template pTemplate="header">
-      <tr>
-        <th class="eyassu-padding">Id</th>
-        <th>Email</th>
-        <th>Start</th>
-        <th>End</th>
-        <th style="width:8rem"></th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product let-editing="editing" let-ri="rowIndex">
-      <tr [pEditableRow]="product">
-        <td pEditableColumn class="eyassu-padding">
-          {{product.code}}
-        </td>
-        <td pEditableColumn class="eyassu-padding">
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <input pInputText type="email" [(ngModel)]="product.email" required>
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{product.email}}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td pEditableColumn class="eyassu-padding" #startDate>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <p-calendar [(ngModel)]="product.startDate" dateFormat="mm/dd/yy" [appendTo]="startDate"></p-calendar>
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{product.startDate | date }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td pEditableColumn class="eyassu-padding" #endDate>
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <p-calendar [(ngModel)]="product.endDate" dateFormat="mm/dd/yy" [appendTo]="endDate"></p-calendar>
-            </ng-template>
-            <ng-template pTemplate="output">
-              {{product.endDate | date }}
-            </ng-template>
-          </p-cellEditor>
-        </td>
-        <td style="text-align:center" class="eyassu-padding">
-          <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
-            (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
-          <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
-            (click)="onRowEditSave(product)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
-          <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
-            (click)="onRowEditCancel(product, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
+    <p-table [value]="tableRowArray.controls" dataKey="value.id"  editMode="row">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="padding">Identifier</th>
+          <th>Email</th>
+          <th>Start</th>
+          <th>End</th>
+          <th style="width:8rem"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-row let-editing="editing" let-i="rowIndex">
+        <ng-container formArrayName="tableRowArray">
+          <tr [pEditableRow]="row" [formGroupName]="i">
+            <td pEditableColumn class="padding">
+              {{row.controls.code.value}}
+            </td>
+            <td pEditableColumn class="padding">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="email" formControlName="email" [ngClass]="{'invalid': !row.controls.email.valid }" />
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{row.controls.email.value}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td pEditableColumn class="padding" #startDate>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <p-calendar dateFormat="mm/dd/yy" [appendTo]="startDate" formControlName="startDate"></p-calendar>
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{row.controls.startDate.value | date :'MM/dd/yyyy' }}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td pEditableColumn class="padding" #endDate>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <p-calendar dateFormat="mm/dd/yy" [appendTo]="endDate" formControlName="endDate"></p-calendar>
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{row.controls.endDate.value | date :'MM/dd/yyyy' }}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td style="text-align:center" class="padding">
+              <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil"
+                (click)="onRowEditInit(row)" class="p-button-info"></button>
+              <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check"
+                [disabled]="!row.valid " (click)="onRowEditSave(row)"
+                class="p-button-info p-button-success p-mr-2"></button>
+              <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times"
+                (click)="onRowEditCancel(row, i)" class="p-button-info p-button-danger"></button>
+            </td>
+          </tr>
+        </ng-container>
+      </ng-template>
+    </p-table>
+
+    <br>Dirty: {{ emailForm.dirty }}
+    <br>Touched: {{ emailForm.touched }}
+    <br>Valid: {{ emailForm.valid }}
+    <br>Value: {{ emailForm.controls.tableRowArray.value | json }}
+
+  </form>
+
 </div>

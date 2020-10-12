@@ -4,12 +4,17 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Roboto, Helvetica, Arial, sans-serif, “Apple Color Emoji”, “Segoe UI Emoji”, “Segoe UI Symbol”;
 }
 
-.eyassu-padding {
-  padding-left: 0 !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+.padding {
+  padding-left: 0.2em !important;
+  padding-top: 0.2em !important;
+  padding-bottom: 0.2em !important;
   padding-right: 0.2em !important;
 }
 
+.invalid {
+  border-color: red !important;
+  border-style: solid !important;
+  color:red !important;
+}
 
 
